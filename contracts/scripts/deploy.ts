@@ -9,11 +9,11 @@ async function main() {
   const repAddress = await reputationSystem.getAddress();
   console.log("ReputationSystem:", repAddress);
 
-  const PredictionMarket = await ethers.getContractFactory("PredictionMarket");
+  const PredictionMarket = await ethers.getContractFactory("WorldCupBetting"); //Changed the deploy script so that when we run a local simulation, the system publishes our revised WorldCupBetting contract instead of the default PredictionMarket contract.
   const predictionMarket = await PredictionMarket.deploy(repAddress);
   await predictionMarket.waitForDeployment();
   const marketAddress = await predictionMarket.getAddress();
-  console.log("PredictionMarket:", marketAddress);
+  console.log("PredictionMarket (WorldCupBetting):", marketAddress);
 
   await reputationSystem.setPredictionMarket(marketAddress);
   console.log("Connected contracts");
@@ -34,3 +34,5 @@ main().catch((error) => {
   console.error(error);
   process.exit(1);
 });
+
+
